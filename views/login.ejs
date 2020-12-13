@@ -1,0 +1,29 @@
+<title>Sewer Controller</title>
+<link rel="stylesheet" type="text/css" href="/css/login.css">
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+<div class="wrapper">
+        <div class="login-card">
+            <h2>Login</h2>
+            <span class="error-message"><% if (messages.error) { %>
+                <%= messages.error %>
+            <% } %></span>
+            <form class="login-input" action="/login" method="POST">
+                <div class="input-group">
+                    <input id="email" class="input-style" type="text" required autocomplete="off" autocorrect="off" autocapitalize="off" name="email">
+                    <label id="label-email" for="email">Email</label>
+                </div>
+                <div class="input-group">
+                    <input id="password" class="input-style" type="password" required autocomplete="off"
+                        autocorrect="off" autocapitalize="off" name="password">
+                    <label id="label-password" for="password">Password</label>
+                </div>
+                <button type="submit" class="login-button">Log In</button>
+		<div class="special-hr">
+                    <p class="mask">OR</p>
+                    <hr>
+                </div>
+            </form>
+            <a class="register-link" href="#">Don't have an account? Don't worry, hence we don't open register!</a>
+        </div>
+</div>
+

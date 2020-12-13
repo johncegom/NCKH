@@ -1,0 +1,122 @@
+html {
+    position: relative;
+    min-height: 100%;
+    background-color: #FFC0CB;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+}
+
+.login-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    border: 1px solid #dbdbdb;
+    margin: auto;
+    background-color: #fff;
+    width: 60%;
+}
+
+.login-card .login-input {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.login-input .input-group {
+    position: relative;
+}
+
+.input-group label {
+    position: absolute;
+    left: 8px;
+    top: 10px;
+    color: gray;
+    pointer-events: none;
+    transition: 0.1s ease-out;
+    font-size: 0.9rem;
+}
+
+.input-group input:valid+#label-email {
+    top: 2px;
+    transform: scale(0.73333) translateX(-13px);
+}
+
+.input-group input:valid+#label-password {
+    top: 2px;
+    transform: scale(0.73333) translateX(-13px);
+}
+
+
+.input-group input:valid {
+    font-size: 0.7rem;
+    padding: 0.6rem 0.4rem 0;
+}
+
+.input-style {
+    height: 36px;
+    padding: 0 0.4rem;
+    background-color: #fafafa;
+    border: 1px solid #dbdbdb;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+    width: 100%;
+    font-size: 1.2rem;
+}
+
+.login-input .login-button {
+    background-color: rgb(0, 148, 246);
+    border: 1px solid transparent;
+    border-radius: 2px;
+    padding: 0.4rem;
+    color: #fff;
+    font-weight: bold;
+    margin: 0.7rem 0 1.5rem;
+}
+
+.login-input .login-button:hover {
+    cursor: pointer;
+}
+
+
+.login-input .special-hr {
+    text-align: center;
+    position: relative;
+}
+
+.special-hr .mask {
+    position: relative;
+    z-index: 2;
+    background: white;
+    display: inline;
+    padding: 1.5rem;
+}
+
+.special-hr hr {
+    position: relative;
+    bottom: 1rem;
+    z-index: 1;
+    border: 1px solid #dbdbdb;
+}
+
+.login-input>a {
+    text-align: center;
+    text-decoration: none;
+    color: #00376b;
+}
+
+.register-link {
+    text-decoration: none;
+    color: #878ffd;
+}
+
+.error-message { 
+    color: red;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
