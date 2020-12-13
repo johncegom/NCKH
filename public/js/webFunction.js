@@ -1,4 +1,4 @@
-var sewerState, getDistance;
+var sewerState, getDistance, schedule;
 var closeSewerButton = document.getElementById("button-down");
 var openSewerButton = document.getElementById("button-up");
 var stopSewerButton = document.getElementById("button-stop");
@@ -94,4 +94,10 @@ function sendRemoveScheduleRequest(scheduleId) {
     axios.post('/schedule/remove', {
         id: scheduleId
     })
+}
+
+function viewSchedule() {
+    getSchedule();
+    console.log(schedule);
+    $('#view-schedule-modal').modal('show');
 }
