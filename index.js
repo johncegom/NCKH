@@ -119,7 +119,6 @@ app.post('/schedule/remove', (req, res) => {
     schedule = schedule.filter((item) => {
         return item['id'] != req.body.id;
     });
-    console.log(schedule);
 })
 
 function checkAuthenticated(req, res, next) {

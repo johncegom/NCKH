@@ -102,26 +102,9 @@ function sendRemoveScheduleRequest(scheduleId) {
 }
 
 function viewSchedule() {
-    // getSchedule();
-    console.log(schedule);
-    let test = [{
-        "id": "1607955397972",
-        "date": "2020-12-14",
-        "time": "21:19",
-        "action": "1"
-    }, {
-        "id": "1607955397972",
-        "date": "2020-12-14",
-        "time": "21:19",
-        "action": "1"
-    }, {
-        "id": "1607955397972",
-        "date": "2020-12-14",
-        "time": "21:19",
-        "action": "1"
-    }];
+    getSchedule();
     document.getElementById('table1').innerHTML = "";
-    buildTable(test);
+    buildTable(schedule);
     $('#view-schedule-modal').modal('show');
 }
 
@@ -146,19 +129,21 @@ function buildTable(arrayData) {
                 action = "Error";
                 break;
         }
-        let row =  `<tr>
+        let row =  `<tr id="delete-${index}">
                         <td>${element.date}</td>
                         <td>${element.time}</td>
                         <td>${action}</td>
-                        <td><button class="btn btn-primary" onclick="deleteOneSchedule(${element.id}, ${this})">Cancel</button></td>
+                        <td><button class="btn btn-primary" onclick="deleteOneSchedule(${element.id}, ${index})">Cancel</button></td>
                     </tr>
                 `;
         table.innerHTML += row;
     });
 }
 
-function deleteOneSchedule(dataId, row) {
+function deleteOneSchedule(dataId, index) {
     sendRemoveScheduleRequest(dataId);
-    let index = row.parentNode.parentNode.rowIndex;
-    table.deleteRow(index);
+    console.log(dataId);
+    let removeElement = document.getElementById(`delete-${index}`).parentNode;
+    removeElement.remove();
+    getSchedule();
 }
