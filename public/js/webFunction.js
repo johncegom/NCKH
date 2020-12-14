@@ -55,6 +55,9 @@ function setSchedule() {
         getSchedule();
 
         isScheduleHandled = false;
+
+        $('#schedule-modal').modal('hide');
+        tata.success("DOOOOOO","Set schedule successful!");
     }
 
 }
