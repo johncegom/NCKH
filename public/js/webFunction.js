@@ -11,7 +11,7 @@ var setScheduleButton = document.getElementById('set-schedule');
 var sewerTimeDOM = document.getElementById('sewer-time');
 var action = document.getElementById('schedule-action');
 var viewScheduleButton = document.getElementById('view-schedule');
-
+var table = document.getElementById('table1');
 
 function closeSewer() {
     let distance = setDistance.value;
@@ -54,7 +54,7 @@ function setSchedule() {
 
         getSchedule();
 
-        isScheduleHandled  = false;
+        isScheduleHandled = false;
     }
 
 }
@@ -77,7 +77,12 @@ function sendSchedulePackage(date, time, action) {
     };
 
     // Converting JSON data to string
-    var data = JSON.stringify({"id": Date.now().toString(), "date": date, "time": time, "action": action });
+    var data = JSON.stringify({
+        "id": Date.now().toString(),
+        "date": date,
+        "time": time,
+        "action": action
+    });
 
     // Sending data with the request
     xhr.send(data);
@@ -85,9 +90,9 @@ function sendSchedulePackage(date, time, action) {
 
 function getSchedule() {
     axios('/schedule')
-    .then((res) => {
-        schedule = res.data;
-    })
+        .then((res) => {
+            schedule = res.data;
+        })
 }
 
 function sendRemoveScheduleRequest(scheduleId) {
@@ -97,7 +102,63 @@ function sendRemoveScheduleRequest(scheduleId) {
 }
 
 function viewSchedule() {
-    getSchedule();
+    // getSchedule();
     console.log(schedule);
+    let test = [{
+        "id": "1607955397972",
+        "date": "2020-12-14",
+        "time": "21:19",
+        "action": "1"
+    }, {
+        "id": "1607955397972",
+        "date": "2020-12-14",
+        "time": "21:19",
+        "action": "1"
+    }, {
+        "id": "1607955397972",
+        "date": "2020-12-14",
+        "time": "21:19",
+        "action": "1"
+    }];
+    document.getElementById('table1').innerHTML = "";
+    buildTable(test);
     $('#view-schedule-modal').modal('show');
+}
+
+function buildTable(arrayData) {
+    let action;
+    let headRow = `<tr>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Command</th>
+                        <th>Action</th>
+                    </tr>`
+    table.innerHTML += headRow;
+    arrayData.forEach((element, index) => {
+        switch (element.action) {
+            case "1":
+                action = "Open Sewer";
+                break;
+            case "0":
+                action = "Close Sewer";
+                break;
+            default:
+                action = "Error";
+                break;
+        }
+        let row =  `<tr>
+                        <td>${element.date}</td>
+                        <td>${element.time}</td>
+                        <td>${action}</td>
+                        <td><button class="btn btn-primary" onclick="deleteOneSchedule(${element.id}, ${this})">Cancel</button></td>
+                    </tr>
+                `;
+        table.innerHTML += row;
+    });
+}
+
+function deleteOneSchedule(dataId, row) {
+    sendRemoveScheduleRequest(dataId);
+    let index = row.parentNode.parentNode.rowIndex;
+    table.deleteRow(index);
 }

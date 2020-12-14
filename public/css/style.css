@@ -88,7 +88,7 @@ p {
     margin: 10px 0;
 }
 
-.info-section > p {
+.info-section>p {
     cursor: default;
 }
 
@@ -206,4 +206,14 @@ p {
 
 #connection {
     text-transform: capitalize;
+}
+
+.my-custom-scrollbar {
+    position: relative;
+    height: 200px;
+    overflow: auto;
+}
+
+.table-wrapper-scroll-y {
+    display: block;
 }
