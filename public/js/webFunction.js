@@ -57,7 +57,10 @@ function setSchedule() {
         isScheduleHandled = false;
 
         $('#schedule-modal').modal('hide');
-        tata.success("DOOOOOO","Set schedule successful!");
+        tata.success("Success","Set schedule successful!");
+    } else {
+        $('#schedule-modal').modal('hide');
+        tata.error("Error","Schedule or action is invalid");
     }
 
 }
