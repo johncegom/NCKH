@@ -57,10 +57,10 @@ function setSchedule() {
         isScheduleHandled = false;
 
         $('#schedule-modal').modal('hide');
-        tata.success("Success","Set schedule successful!");
+        tata.success("Success", "Set schedule successful!");
     } else {
         $('#schedule-modal').modal('hide');
-        tata.error("Error","Schedule or action is invalid");
+        tata.error("Error", "Schedule or action is invalid");
     }
 
 }
@@ -135,7 +135,7 @@ function buildTable(arrayData) {
                 action = "Error";
                 break;
         }
-        let row =  `<tr id="delete-${index}">
+        let row = `<tr id="delete-${index}">
                         <td>${element.date}</td>
                         <td>${element.time}</td>
                         <td>${action}</td>
@@ -147,9 +147,19 @@ function buildTable(arrayData) {
 }
 
 function deleteOneSchedule(dataId, index) {
-    sendRemoveScheduleRequest(dataId);
+    axios.post('/schedule/remove', {
+        id: dataId
+    }).then((res) => {
+        console.log(res);
+        let removeElement = document.getElementById(`delete-${index}`).parentNode;
+        removeElement.remove();
+        tata.success("Success", "Cancel schedule successful!");
+        getSchedule();
+    })
+    .catch((err) => {
+        tata.error("Cannot deleted!");
+        console.log(err);
+    })
     console.log(dataId);
-    let removeElement = document.getElementById(`delete-${index}`).parentNode;
-    removeElement.remove();
-    getSchedule();
+
 }
