@@ -105,6 +105,12 @@ function sendRemoveScheduleRequest(scheduleId) {
     axios.post('/schedule/remove', {
         id: scheduleId
     })
+    .then((res) => {
+        let removeElement = document.getElementById(`delete-${scheduleId}`).parentNode;
+        removeElement.remove();
+        tata.success("Success", "Scheduled action successful!");
+        getSchedule();
+    })
 }
 
 function viewSchedule() {
@@ -123,7 +129,7 @@ function buildTable(arrayData) {
                         <th>Action</th>
                     </tr>`
     table.innerHTML += headRow;
-    arrayData.forEach((element, index) => {
+    arrayData.forEach((element) => {
         switch (element.action) {
             case "1":
                 action = "Open Sewer";
@@ -135,23 +141,23 @@ function buildTable(arrayData) {
                 action = "Error";
                 break;
         }
-        let row = `<tr id="delete-${index}">
+        let row = `<tr id="delete-${element.id}">
                         <td>${element.date}</td>
                         <td>${element.time}</td>
                         <td>${action}</td>
-                        <td><button class="btn btn-primary" onclick="deleteOneSchedule(${element.id}, ${index})">Cancel</button></td>
+                        <td><button class="btn btn-primary" onclick="deleteOneSchedule(${element.id})">Cancel</button></td>
                     </tr>
                 `;
         table.innerHTML += row;
     });
 }
 
-function deleteOneSchedule(dataId, index) {
+function deleteOneSchedule(dataId) {
     axios.post('/schedule/remove', {
         id: dataId
     }).then((res) => {
         console.log(res);
-        let removeElement = document.getElementById(`delete-${index}`).parentNode;
+        let removeElement = document.getElementById(`delete-${dataId}`).parentNode;
         removeElement.remove();
         tata.success("Success", "Cancel schedule successful!");
         getSchedule();
